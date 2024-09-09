@@ -4,6 +4,7 @@ const { createUser,
         uddateUser, 
         deleteUser,
         queryData,
+        finder,
         
 } = require("../controllers/userController");
 const router = require('express').Router();
@@ -13,7 +14,11 @@ const router = require('express').Router();
 // router.route('/:id').get(getOneUser).put(uddateUser).delete(deleteUser);
 
 // ------ basic querry ------//
-router.get('/queryData', queryData);
+// router.get('/queryData', queryData);
+
+// ------ finder ------//
+router.get('/finder', finder);
+
 
 
 module.exports = router;

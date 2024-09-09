@@ -139,6 +139,54 @@ const queryData = async (req, res) => {
 
         })
         res.status(200).send(user);
+}
+
+const finder = async (req, res) => {
+
+
+    //-------find all ------//
+        // const user = await User.findAll({});
+        
+        // res.status(200).send(user);
+
+
+    //-------find by pk  ------//
+            // const user = await User.findByPk(1);
+            
+            // res.status(200).send(user);
+
+
+    //-------find one  ------//
+            // const user = await User.findOne({
+            //     where:{
+            //         id:5
+            //     }
+            // });
+            
+            // res.status(200).send(user);
+
+
+    //-------find or create  ------//
+            // const [user, created] = await User.findOrCreate({
+            //     where:{
+            //         username:"Thomas"
+            //     },
+            //     defaults: {
+            //         email: 'thomas@gmail.com',
+            //         password:"thomas123"
+            //     },
+            // });
+            
+            // res.status(200).json({user,created});
+
+
+    //-------find and count  ------//
+            const {count, rows} = await User.findAndCountAll({
+                limit:2,
+                offset:2
+            });
+            
+            res.status(200).json({count,rows});
     }
 
 module.exports = {
@@ -148,4 +196,5 @@ module.exports = {
     uddateUser,
     deleteUser,
     queryData,
+    finder,
 }

@@ -187,7 +187,28 @@ const finder = async (req, res) => {
             });
             
             res.status(200).json({count,rows});
-    }
+}
+
+const getterAndSetter = async(req, res) => {
+
+
+    //------for setter-----//
+        // const user = await User.create({
+        //     "username":"daniel",
+        //     "email":"daniel",
+        //     "password":"daniel123"
+        // });
+
+        // res.status(200).send(user);
+
+
+    //------for getter-----//
+        const user = await User.findAll({});
+
+        res.status(200).send(user);
+
+
+}
 
 module.exports = {
     createUser,
@@ -197,4 +218,5 @@ module.exports = {
     deleteUser,
     queryData,
     finder,
+    getterAndSetter,
 }

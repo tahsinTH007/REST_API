@@ -5,6 +5,7 @@ const { createUser,
         deleteUser,
         queryData,
         finder,
+        getterAndSetter,
         
 } = require("../controllers/userController");
 const router = require('express').Router();
@@ -17,7 +18,14 @@ const router = require('express').Router();
 // router.get('/queryData', queryData);
 
 // ------ finder ------//
-router.get('/finder', finder);
+// router.get('/finder', finder);
+
+
+// ------ Getter and Setter ------//
+// for setter
+router.post('/getterAndSetter', getterAndSetter);
+// for getter
+router.get('/getterAndSetter', getterAndSetter);
 
 
 

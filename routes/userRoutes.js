@@ -6,12 +6,13 @@ const { createUser,
         queryData,
         finder,
         getterAndSetter,
+        RowQuery,
         
 } = require("../controllers/userController");
 const router = require('express').Router();
 
 // ------ CRUD operation -------//
-router.route('/').post(createUser).get(getAllUsers);
+// router.route('/').post(createUser).get(getAllUsers);
 // router.route('/:id').get(getOneUser).put(uddateUser).delete(deleteUser);
 
 // ------ basic querry ------//
@@ -26,6 +27,10 @@ router.route('/').post(createUser).get(getAllUsers);
 // router.post('/getterAndSetter', getterAndSetter);
 // for getter
 // router.get('/getterAndSetter', getterAndSetter);
+
+
+// ------ Row Query ------//
+router.get("/rowQuerry", RowQuery)
 
 
 

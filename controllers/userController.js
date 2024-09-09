@@ -1,4 +1,4 @@
-const { Sequelize,where, col, Op } = require('sequelize');
+const { Sequelize,where, col, Op, QueryTypes } = require('sequelize');
 const db = require('../models/index');
 
 
@@ -189,7 +189,7 @@ const finder = async (req, res) => {
             res.status(200).json({count,rows});
 }
 
-const getterAndSetter = async(req, res) => {
+const getterAndSetter = async (req, res) => {
 
 
     //------for setter-----//
@@ -210,6 +210,21 @@ const getterAndSetter = async(req, res) => {
 
 }
 
+const RowQuery = async (req, res) => {
+      const user = await db.sequelize.query("Select * from users where username = $username ",
+      {
+        // replacements: ["james"], //where username = ? 
+
+        // replacements: {username: "james"}, //where username = :username
+        
+        bind:{username:"james"}, // where username = $username
+
+        type: QueryTypes.SELECT
+      })
+
+      res.status(200).send(user)
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -219,4 +234,5 @@ module.exports = {
     queryData,
     finder,
     getterAndSetter,
+    RowQuery,
 }

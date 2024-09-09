@@ -6,6 +6,9 @@ const sequelize = new Sequelize(
     dbConfig.USER,
     dbConfig.PASSWORD,{
         host: dbConfig.HOST,
+        //--- for stop the query in terminal ---//
+        // logging: false,
+        
         dialect: dbConfig.dialect,
         operatorsAliases: false,
 
@@ -29,6 +32,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.users = require('../models/userModel')(sequelize, DataTypes);
+// db.users = sequelize.model.User;
 
 db.sequelize.sync({force: false})
                 .then(() => console.log("Yes re-sync done..."))

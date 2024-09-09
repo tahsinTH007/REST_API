@@ -1,12 +1,13 @@
-const { where } = require('sequelize');
+const { Sequelize,where, col, Op } = require('sequelize');
 const db = require('../models/index');
+
 
 // create main model
 const User = db.users;
 
 // main work
 
-// 1st work create user
+// work create user
 const createUser = async (req, res) => {
    try {
     let info = {
@@ -25,7 +26,7 @@ const createUser = async (req, res) => {
 
 }
 
-// 2nd work find all user
+// find all user
 const getAllUsers = async (req, res) => {
     try {
         const user = await User.findAll({
@@ -41,7 +42,7 @@ const getAllUsers = async (req, res) => {
     }
 }
 
-// 3rd get one user
+// get one user
 const getOneUser = async (req, res) => {
    try {
     const { id } = req.params;
@@ -62,7 +63,7 @@ const getOneUser = async (req, res) => {
    }
 }
 
-// 4th update user
+// update user
 const uddateUser = async (req, res) => {
     try {
      const { id } = req.params;
@@ -74,7 +75,7 @@ const uddateUser = async (req, res) => {
     }
 }
 
-// 5th delete user
+// delete user
 const deleteUser = async (req, res) => {
     try {
      const { id } = req.params;
@@ -90,10 +91,61 @@ const deleteUser = async (req, res) => {
     }
  }
 
+const queryData = async (req, res) => {
+        //------create a user ------//
+
+        // const user = await User.create({
+        //     "username":"david",
+        //     "email":"david@gmail.com",
+        //     "password":"david123"
+        // });
+
+        // res.status(200).send(user);
+
+
+        //------Simple SELECT queries------//
+        
+        // const user = await User.findAll({});
+        
+        // res.status(200).send(user);
+
+        
+        //------Specifying attributes for SELECT queries and Attributes renamed------//
+        
+        // const user = await User.findAll({
+        //     attributes:["username",["email","userEmail"]]
+        // });
+        
+        // res.status(200).send(user);
+        
+        
+        //------find by using where------//
+
+        const user = await User.findAll({
+            where:{
+                // id:[1,2,3]
+            //     username:{
+            //         // [Op.eq]: "james"
+            //     },
+                // [Op.and]: [{ username: "james" }, { email: 'james@gmail.com' }],
+
+            //    [Op.or]: [{ username: "james" }, { email: 'malek@gmail.com' }],
+            },
+            order:[
+                ["id","DESC"]
+            ],
+            limit: 2,
+            offset: 2,
+
+        })
+        res.status(200).send(user);
+    }
+
 module.exports = {
     createUser,
     getAllUsers,
     getOneUser,
     uddateUser,
     deleteUser,
+    queryData,
 }

@@ -3,6 +3,13 @@ module.exports = (sequelize, DataTypes) => {
         username: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
+            validate:{
+                notEmpty: {
+                    args: true,
+                    msg: "Username must not be empty"
+                },
+            }
             // get(){
             //     return this.getDataValue("username") + " xyz"
             // }
@@ -10,9 +17,17 @@ module.exports = (sequelize, DataTypes) => {
         email:{
             type: DataTypes.STRING,
             allowNull: false,
-            set(value){
-                this.setDataValue("email",value+"@gmail.com")
-            }
+            // set(value){
+            //     this.setDataValue("email",value+"@gmail.com")
+            // },
+            validate:{
+                notEmpty: true,
+                isEmail: {
+                    args: true,
+                    msg: "Must give an email"
+                },
+            },
+            unique: true,
         },
         password:{
             type: DataTypes.STRING,

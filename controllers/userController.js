@@ -19,9 +19,9 @@ const createUser = async (req, res) => {
     const user = await User.create(info);
     res.status(200).send(user);
 
-   } catch (error) {
-    console.log(error);
-    res.sendStatus(400);
+   } catch (errors) {
+    console.log(errors.message);
+    res.status(400).send(errors.message);
    }
 
 }

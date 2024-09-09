@@ -11,7 +11,7 @@ const { createUser,
 const router = require('express').Router();
 
 // ------ CRUD operation -------//
-// router.route('/').post(createUser).get(getAllUsers);
+router.route('/').post(createUser).get(getAllUsers);
 // router.route('/:id').get(getOneUser).put(uddateUser).delete(deleteUser);
 
 // ------ basic querry ------//
@@ -23,9 +23,9 @@ const router = require('express').Router();
 
 // ------ Getter and Setter ------//
 // for setter
-router.post('/getterAndSetter', getterAndSetter);
+// router.post('/getterAndSetter', getterAndSetter);
 // for getter
-router.get('/getterAndSetter', getterAndSetter);
+// router.get('/getterAndSetter', getterAndSetter);
 
 
 

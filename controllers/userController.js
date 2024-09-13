@@ -1,9 +1,11 @@
-const { Sequelize,where, col, Op, QueryTypes } = require('sequelize');
+const { Sequelize,where, col, Op, QueryTypes, Model } = require('sequelize');
 const db = require('../models/index');
 
 
 // create main model
 const User = db.users;
+const Post = db.posts;
+const Tag = db.tags;
 
 // main work
 
@@ -225,6 +227,52 @@ const RowQuery = async (req, res) => {
       res.status(200).send(user)
 }
 
+const create = async(req, res) => {
+    //------create post-------//
+    const data = await Post.create({
+        name:"Sports",
+        title:"cricket news",
+        content:"cricket",
+        user_id:3
+    });
+
+    res.status(200).send(data);
+
+}
+
+const associations = async (req, res) => {
+    //-------one to one------//
+        // const data = await User.findAll({
+        //     attributes:["username","id"],
+        //     include:{
+        //         model:Post,
+        //         attributes:["name","user_id"]
+        //     },
+        //     where:{
+        //         id:3
+        //     }
+        // });
+        // res.status(200).send(data);
+   //-----Post to user-----//
+        // const data = await Post.findAll({
+        //     attributes:["name","user_id"],
+        //     include:{
+        //         model:User,
+        //         attributes:["username","id"]
+        //     }
+        // });
+        // res.status(200).send(data);
+   //------post to tags through post_tags-----//
+        const data = await Tag.findAll({
+            attributes:['name'],
+            include:{
+                model:Post,
+                attributes:["name","title"]
+            }
+        });
+        res.status(200).send(data);
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -235,4 +283,6 @@ module.exports = {
     finder,
     getterAndSetter,
     RowQuery,
+    associations,
+    create,
 }

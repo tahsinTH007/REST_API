@@ -8,7 +8,6 @@ const sequelize = new Sequelize(
         host: dbConfig.HOST,
         //--- for stop the query in terminal ---//
         // logging: false,
-        
         dialect: dbConfig.dialect,
         operatorsAliases: false,
 
@@ -31,8 +30,24 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
+//all models
 db.users = require('../models/userModel')(sequelize, DataTypes);
-// db.users = sequelize.model.User;
+db.posts = require("./postModel")(sequelize, DataTypes);
+db.tags = require("./tagsModel")(sequelize, DataTypes);
+db.post_tags = require("./postTagsModel")(sequelize, DataTypes);
+
+//----one to one association----//
+// db.users.hasOne(db.posts, {foreignKey:"user_id"});
+
+//----one to many association----//
+db.users.hasMany(db.posts, {foreignKey:"user_id"})
+
+db.posts.belongsTo(db.users, {foreignKey:"user_id"});
+
+//----many to many association----//
+db.posts.belongsToMany(db.tags,{through:"post_tags"})
+db.tags.belongsToMany(db.posts,{through:"post_tags"})
+
 
 db.sequelize.sync({force: false})
                 .then(() => console.log("Yes re-sync done..."))

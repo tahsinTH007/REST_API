@@ -6,6 +6,7 @@ const db = require('../models/index');
 const User = db.users;
 const Post = db.posts;
 const Tag = db.tags;
+const Student = db.students;
 
 // main work
 
@@ -273,6 +274,28 @@ const associations = async (req, res) => {
         res.status(200).send(data);
 }
 
+const paranoid = async(req, res) => {
+        //-----find all students----//
+            const data = await Student.findAll({});
+            res.status(200).send(data);
+
+        //-----delete students----//
+            // const data = await Student.destroy({
+            //     where:{
+            //         id:2
+            //     }
+            // });
+            // res.status(200).send(data);
+
+        //-----delete students----//
+              await Student.restore({
+                where:{
+                    id:2
+                }
+              });
+              res.status(200).send("ok");
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -285,4 +308,5 @@ module.exports = {
     RowQuery,
     associations,
     create,
+    paranoid,
 }

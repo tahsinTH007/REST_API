@@ -9,6 +9,7 @@ const { createUser,
         RowQuery,
         create,
         associations,
+        paranoid,
         
 } = require("../controllers/userController");
 const router = require('express').Router();
@@ -40,6 +41,10 @@ router.get("/rowQuerry", RowQuery)
 
 //--------Associations -----///
 router.get("/associations", associations)
+
+
+//--------Paranoid -----///
+router.get("/paranoid", paranoid)
 
 
 module.exports = router;

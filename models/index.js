@@ -35,6 +35,7 @@ db.users = require('../models/userModel')(sequelize, DataTypes);
 db.posts = require("./postModel")(sequelize, DataTypes);
 db.tags = require("./tagsModel")(sequelize, DataTypes);
 db.post_tags = require("./postTagsModel")(sequelize, DataTypes);
+db.students = require("./studentModel")(sequelize, DataTypes);
 
 //----one to one association----//
 // db.users.hasOne(db.posts, {foreignKey:"user_id"});

@@ -334,6 +334,24 @@ const hooks = async (req, res) => {
     res.status(200).send(data);
 }
 
+const trans = async (req, res) =>{
+    const t = await db.sequelize.transaction();
+    try {
+        const data = await Student.create({
+            name:"tanvin",
+            email: "tanvin@gmail.com",
+            password: "12341234"
+        },{
+            transaction: t
+        });
+        await t.commit()
+        res.status(200).send("ok");
+    } catch (error) {
+        await t.rollback()
+    }
+
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -349,4 +367,5 @@ module.exports = {
     paranoid,
     polymorphic,
     hooks,
+    trans,
 }

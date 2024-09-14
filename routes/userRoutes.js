@@ -11,6 +11,7 @@ const { createUser,
         associations,
         paranoid,
         polymorphic,
+        hooks,
         
 } = require("../controllers/userController");
 const router = require('express').Router();
@@ -50,5 +51,9 @@ router.get("/paranoid", paranoid);
 
 //---------Polymorphic Association-------//
 router.get("/polymorphic",polymorphic);
+
+
+//---------Hooks-------//
+router.get("/hooks",hooks);
 
 module.exports = router;

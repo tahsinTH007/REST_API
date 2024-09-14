@@ -33,16 +33,16 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        fullName:{
-            type: DataTypes.VIRTUAL,
-            type: DataTypes.VIRTUAL,
-            get() {
-              return `${this.username} scott`;
-            },
-            set(value) {
-              throw new Error('Do not try to set the `fullName` value!');
-            },
-        }
+        // fullName:{
+        //     type: DataTypes.VIRTUAL,
+        //     type: DataTypes.VIRTUAL,
+        //     get() {
+        //       return `${this.username} scott`;
+        //     },
+        //     set(value) {
+        //       throw new Error('Do not try to set the `fullName` value!');
+        //     },
+        // }
     });
     return User;
 }

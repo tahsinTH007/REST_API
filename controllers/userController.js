@@ -325,6 +325,15 @@ const polymorphic = async(req, res) => {
     // res.status(200).send(data);
 }
 
+const hooks = async (req, res) => {
+    const data = await Student.create({
+        name:"tanvin",
+        email: "tanvin@gmail.com",
+        password: "12341234"
+    });
+    res.status(200).send(data);
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -339,4 +348,5 @@ module.exports = {
     create,
     paranoid,
     polymorphic,
+    hooks,
 }

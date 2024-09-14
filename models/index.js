@@ -36,6 +36,9 @@ db.posts = require("./postModel")(sequelize, DataTypes);
 db.tags = require("./tagsModel")(sequelize, DataTypes);
 db.post_tags = require("./postTagsModel")(sequelize, DataTypes);
 db.students = require("./studentModel")(sequelize, DataTypes);
+db.images = require("./imageModel")(sequelize,DataTypes);
+db.videos = require("./videoModel")(sequelize,DataTypes);
+db.comments = require("./commentModel")(sequelize,DataTypes);
 
 //----one to one association----//
 // db.users.hasOne(db.posts, {foreignKey:"user_id"});
@@ -49,6 +52,32 @@ db.posts.belongsTo(db.users, {foreignKey:"user_id"});
 db.posts.belongsToMany(db.tags,{through:"post_tags"})
 db.tags.belongsToMany(db.posts,{through:"post_tags"})
 
+//------Polymorphic Association-----//
+db.images.hasMany(db.comments,{
+    foreignKey:"commentableId",
+    constraints: false,
+    scope:{
+        commentableType:"image"
+    }
+});
+
+db.videos.hasMany(db.comments,{
+    foreignKey:"commentableId",
+    constraints: false,
+    scope:{
+        commentableType:"video"
+    }
+});
+
+db.comments.belongsTo(db.images,{
+    foreignKey:"commentableId",
+    constraints: false,
+});
+
+db.comments.belongsTo(db.videos,{
+    foreignKey:"commentableId",
+    constraints: false,
+});
 
 db.sequelize.sync({force: false})
                 .then(() => console.log("Yes re-sync done..."))

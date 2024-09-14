@@ -10,6 +10,7 @@ const { createUser,
         create,
         associations,
         paranoid,
+        polymorphic,
         
 } = require("../controllers/userController");
 const router = require('express').Router();
@@ -36,15 +37,18 @@ router.get('/getterAndSetter', getterAndSetter);
 
 
 // ------ Row Query ------//
-router.get("/rowQuerry", RowQuery)
+router.get("/rowQuerry", RowQuery);
 
 
 //--------Associations -----///
-router.get("/associations", associations)
+router.get("/associations", associations);
 
 
 //--------Paranoid -----///
-router.get("/paranoid", paranoid)
+router.get("/paranoid", paranoid);
 
+
+//---------Polymorphic Association-------//
+router.get("/polymorphic",polymorphic);
 
 module.exports = router;

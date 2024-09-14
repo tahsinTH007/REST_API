@@ -7,6 +7,9 @@ const User = db.users;
 const Post = db.posts;
 const Tag = db.tags;
 const Student = db.students;
+const Image = db.images;
+const Video = db.videos;
+const Comment = db.comments;
 
 // main work
 
@@ -296,6 +299,32 @@ const paranoid = async(req, res) => {
               res.status(200).send("ok");
 }
 
+const polymorphic = async(req, res) => {
+//-------for image to comment-----//
+    let data = await Image.findAll({
+        include:[{
+            model: Comment
+        }]
+    });
+
+    res.status(200).send(data);
+
+
+//-------for video to comment-----//  
+    // let data = await Video.findAll({
+    //     include:[{
+    //         model: Comment
+    //     }]
+    // });
+    // res.status(200).send(data);
+
+//--------for comment to video or image------//
+    // let data = await Comment.findAll({
+    //     include:[Image,Video]
+    // });
+    // res.status(200).send(data);
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -309,4 +338,5 @@ module.exports = {
     associations,
     create,
     paranoid,
+    polymorphic,
 }

@@ -40,6 +40,19 @@ db.images = require("./imageModel")(sequelize,DataTypes);
 db.videos = require("./videoModel")(sequelize,DataTypes);
 db.comments = require("./commentModel")(sequelize,DataTypes);
 
+
+// scope
+db.students.addScope("CheckSection",{
+    where:{
+        section: "6B"
+    }
+})
+
+// limit scope
+db.students.addScope("limitCheck",{
+    limit:2
+})
+
 //----one to one association----//
 // db.users.hasOne(db.posts, {foreignKey:"user_id"});
 

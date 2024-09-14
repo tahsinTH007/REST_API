@@ -352,6 +352,12 @@ const trans = async (req, res) =>{
 
 }
 
+const scope = async (req, res) => {
+    const data = await Student.scope("limitCheck").findAll({});
+
+    res.status(200).send(data);
+}
+
 module.exports = {
     createUser,
     getAllUsers,
@@ -368,4 +374,5 @@ module.exports = {
     polymorphic,
     hooks,
     trans,
+    scope,
 }

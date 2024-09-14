@@ -13,6 +13,7 @@ const { createUser,
         polymorphic,
         hooks,
         trans,
+        scope,
         
 } = require("../controllers/userController");
 const router = require('express').Router();
@@ -60,5 +61,8 @@ router.get("/hooks",hooks);
 
 //---------Transactions-------//
 router.get("/transactions",trans);
+
+//---------Scope-------//
+router.get("/scope",scope);
 
 module.exports = router;
